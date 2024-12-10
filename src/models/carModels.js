@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema(
+const carSchema = new Schema(
   {
     name: {
       type: String,
       unique: true,
-      required: [true, "El nombre del producto es obligatorio"],
+      required: [true, "El nombre del Car es obligatorio"],
       trim: true,
       minlength: [3, "El nombre debe tener al menos 3 caracteres"],
       maxlength: [100, "El nombre no puede exceder los 100 caracteres"],
@@ -17,7 +17,7 @@ const productSchema = new Schema(
     },
     price: {
       type: Number,
-      required: [true, "El precio del producto es obligatorio"],
+      required: [true, "El precio del car es obligatorio"],
       min: [0, "El precio no puede ser menor a 0"],
     },
     description: {
@@ -40,58 +40,58 @@ const productSchema = new Schema(
   }
 );
 
-const Product = mongoose.model("products", productSchema);
+const Car = mongoose.model("cars", carSchema);
 
-const getAllProducts = async () => {
+const getAllCars = async () => {
   try {
-    return await Product.find();
+    return await Car.find();
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("Error fetching car:", error);
     throw error;
   }
 };
 
-const getProductById = async (id) => {
+const getCarById = async (id) => {
   try {
-    return await Product.findById(id);
+    return await Car.findById(id);
   } catch (error) {
-    console.error("Error fetching product by ID:", error);
+    console.error("Error fetching car by ID:", error);
     throw error;
   }
 };
 
-const createProduct = async (newProduct) => {
+const createCar = async (newCar) => {
   try {
-    const product = new Product(newProduct);
-    return await product.save();
+    const car = new Car(newCar);
+    return await car.save();
   } catch (error) {
-    console.error("Error creating product:", error);
+    console.error("Error creating car:", error);
     throw error;
   }
 };
 
-const updateProduct = async (id, updateData) => {
+const updateCar = async (id, updateData) => {
   try {
-    return await Product.findByIdAndUpdate(id, updateData, { new: true });
+    return await Car.findByIdAndUpdate(id, updateData, { new: true });
   } catch (error) {
-    console.error("Error updating product:", error);
+    console.error("Error updating car:", error);
     throw error;
   }
 };
 
-const deleteProduct = async (id) => {
+const deleteCar = async (id) => {
   try {
-    return await Product.findByIdAndDelete(id);
+    return await Car.findByIdAndDelete(id);
   } catch (error) {
-    console.error("Error deleting product:", error);
+    console.error("Error deleting car:", error);
     throw error;
   }
 };
 
 export default {
-  getAllProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+  getAllCars,
+  getCarById,
+  createCar,
+  updateCar,
+  deleteCar,
 };
