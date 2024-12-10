@@ -5,14 +5,14 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-} from "../controllers/productController.js";
+} from "../controllers/ProductController.js";
 import { auth } from "../middleware/authMiddleware.js";
 const productRoutes = Router();
 
-productRoutes.get("/", auth, getAllProducts);
+productRoutes.get("/", getAllProducts);
 productRoutes.get("/:id", getProductById);
-productRoutes.post("/", createProduct);
-productRoutes.patch("/:id", updateProduct);
-productRoutes.delete("/:id", deleteProduct);
+productRoutes.post("/", auth, createProduct);
+productRoutes.patch("/:id", auth, updateProduct);
+productRoutes.delete("/:id", auth, deleteProduct);
 
 export { productRoutes };
