@@ -4,34 +4,38 @@ const { Schema } = mongoose;
 
 const carSchema = new Schema(
   {
-    name: {
+    model: {
       type: String,
       unique: true,
-      required: [true, "El nombre del Car es obligatorio"],
+      required: [true, "The car model is required"],
       trim: true,
-      minlength: [3, "El nombre debe tener al menos 3 caracteres"],
-      maxlength: [100, "El nombre no puede exceder los 100 caracteres"],
+      minlength: [3, "The model must be at least 3 characters long"],
+      maxlength: [100, "The model cannot exceed 100 characters"],
     },
     brand: {
       type: String,
+      required: [true, "The car brand is required"],
+      trim: true,
+      minlength: [2, "The brand must be at least 2 characters long"],
+      maxlength: [50, "The brand cannot exceed 50 characters"],
     },
     price: {
       type: Number,
-      required: [true, "El precio del car es obligatorio"],
-      min: [0, "El precio no puede ser menor a 0"],
+      required: [true, "The car price is required"],
+      min: [0, "The price cannot be less than 0"],
     },
     description: {
       type: String,
       trim: true,
-      maxlength: [500, "La descripción no puede exceder los 500 caracteres"],
+      maxlength: [500, "The description cannot exceed 500 characters"],
     },
     stock: {
       type: Number,
-      required: [true, "El stock es obligatorio"],
-      min: [0, "El stock no puede ser menor a 0"],
+      required: [true, "The stock is required"],
+      min: [0, "The stock cannot be less than 0"],
       validate: {
         validator: Number.isInteger,
-        message: "El stock debe ser un número entero",
+        message: "The stock must be an integer",
       },
     },
   },

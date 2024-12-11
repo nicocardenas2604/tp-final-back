@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 process.loadEnvFile();
 
-const JWT_SECRET = process.env.JWT_SECRET; // Usa la misma clave secreta que en el controlador de login
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const auth = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1]; // Obtener el token del encabezado Authorization
+  const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     return res

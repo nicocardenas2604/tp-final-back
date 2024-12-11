@@ -35,7 +35,7 @@ const login = async (dataUser) => {
 
   const existingUser = await User.findOne({ username });
   if (!existingUser) {
-    return null; // Usuario no encontrado
+    return null;
   }
 
   const isMatch = await bcryptjs.compare(password, existingUser.password);

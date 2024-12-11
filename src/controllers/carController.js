@@ -22,12 +22,13 @@ const getCarById = async (req, res) => {
 
 const createCar = async (req, res) => {
   try {
-    const { name, price, description, stock } = req.body;
-    if (!name || !price || !description || !stock) {
+    const { model, brand, price, description, stock } = req.body;
+    if (!model || !brand || !price || !description || !stock) {
       return res.status(400).json({ error: "bad request, invalid data" });
     }
     const newCar = await carModels.createCar({
-      name,
+      model,
+      brand,
       price,
       description,
       stock,
@@ -43,7 +44,7 @@ const updateCar = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
     const car = await carModels.updateCar(id, body);
-    if (!car) return res.status(404).json({ message: "Car no encontrado" });
+    if (!car) return res.status(404).json({ message: "Car not found" });
     res.json(car);
   } catch (error) {
     res.status(500).json({ error: "server error" });
@@ -54,7 +55,7 @@ const deleteCar = async (req, res) => {
   try {
     const { id } = req.params;
     const car = await carModels.deleteCar(id);
-    if (!car) return res.status(404).json({ message: "car no encontrado" });
+    if (!car) return res.status(404).json({ message: "car not found" });
     res.json(car);
   } catch (error) {
     res.status(500).json({ error: "server error" });
